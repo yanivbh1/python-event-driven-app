@@ -1,0 +1,30 @@
+services:
+  mongodb_container:
+    image: mongo:latest
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+  frontend:
+    build: frontend
+    ports:
+      - 8000:8000
+    networks:
+      - tutorial
+  # consumer1_database:
+  #   build: consumer_1_database
+  #   networks:
+  #     - tutorial
+  # consumer2_process:
+  #   build: consumer_2_process
+  #   networks:
+  #     - tutorial
+networks:
+  tutorial:
+    ipam:
+      driver: default
+volumes:
+  mongodb_data_container:
