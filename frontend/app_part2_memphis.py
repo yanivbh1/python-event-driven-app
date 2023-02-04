@@ -47,6 +47,7 @@ async def order(item={'name':'hamburger', 'quantity':1, 'status': "new_order"}):
     print(item)
     current_time = datetime.datetime.now()
     item["order_date"] = current_time.strftime("%m/%d/%Y, %H:%M:%S")
+    item["status"] = "new"
     item["_id"] = secrets.token_hex(nbytes=12)
     print("Saving the order to the DB")
     try:

@@ -16,14 +16,14 @@ services:
       - 8000:8000
     networks:
       - tutorial
-  # consumer1_database:
-  #   build: consumer_1_database
-  #   networks:
-  #     - tutorial
-  # consumer2_process:
-  #   build: consumer_2_process
-  #   networks:
-  #     - tutorial
+  process:
+    build: process
+    networks:
+      - tutorial
+  delivery:
+    build: delivery
+    networks:
+      - tutorial
 networks:
   tutorial:
     ipam:
