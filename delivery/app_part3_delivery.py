@@ -19,6 +19,7 @@ async def main():
     async def process_delivery(msgs, error, context):
         try:
             for msg in msgs:
+                await msg.ack()
                 order = json.loads(msg.get_data())
                 current_time = datetime.datetime.now()
                 print("New delivery received: ", str(order))
@@ -26,7 +27,6 @@ async def main():
                 print("Updating its DB record")
                 order["delivery_date"] = current_time.strftime("%m/%d/%Y, %H:%M:%S")
                 order["status"] = "delivered"
-                await msg.ack()
 
                 try:
                     filter = { '_id': order["_id"] }
